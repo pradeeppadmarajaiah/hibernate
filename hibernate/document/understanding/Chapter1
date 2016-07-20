@@ -1,0 +1,72 @@
+Hibernate
+	ORM tool
+	Implements JPA 
+
+ORM Mapping :
+			Class corresponds to DB table 
+			Object corresponds to rows in DB table
+			Example : Order Class corresponds to DB table 
+						order1 corresponds to 1st row in DB table
+						order2 corresponds to 1st row in DB table
+			Problem :	Objects is there in java, but in db level 
+						Obect to DB Record set mapping :	So Mapping needs to be done @ both side which will causes tedious task as the column or table grows.
+						Pain : 
+							Mapping Member variable to columns
+							Mapping relationship : Example Order has reference to Address table. There need to manage this relationship manually which requires a complex query.
+							Handling data types : DB has not boolean. This needs to be handled manually.
+			
+
+Question :
+
+What is hibernate 
+	Hibernate is an open source, lightweight, ORM (Object Relational Mapping) tool.
+
+ORM : ORM stands for Object-Relational Mapping (ORM) 
+	Programming technique for converting data between relational databases and object oriented programming languages such as Java, C# etc.
+
+Advantages:
+	1) Opensource and Lightweight: Hibernate framework is open source under the LGPL license and lightweight.
+	2) Fast performance: The performance of hibernate framework is fast because cache is internally used in hibernate framework. There are two types of cache in hibernate framework first level cache and second level cache. First level cache is enabled bydefault.
+	3) Database Independent query: HQL (Hibernate Query Language) is the object-oriented version of SQL. It generates the database independent queries. So you don't need to write database specific queries. Before Hibernate, If database is changed for the project, we need to change the SQL query as well that leads to the maintenance problem.
+	4) Automatic table creation: Hibernate framework provides the facility to create the tables of the database automatically. So there is no need to create tables in the database manually.
+	5) Simplifies complex join: To fetch data form multiple tables is easy in hibernate framework.
+	6) Provides query statistics and database status: Hibernate supports Query cache and provide statistics about query and database status.
+
+What are the advantages of Hibernate over JDBC?
+	Hibernate supports caching that is better for performance, JDBC queries are not cached hence performance is low.
+	Hibernate provide option through which we can create database tables too, for JDBC tables must exist in the database.
+	Hibernate supports JPA annotations, so code is independent of implementation and easily replaceable with other ORM tools. JDBC code is very tightly coupled with the application.
+	JDBC API throws SQLException that is a checked exception, so we need to write a lot of try-catch block code. Most of the times it’s redundant in every JDBC call and used for transaction management. Hibernate wraps JDBC exceptions and throw JDBCException or HibernateException un-checked exception, so we don’t need to write code to handle it. Hibernate built-in transaction management removes the usage of try-catch blocks.
+	Hibernate itself takes care of mapping using XML files so developer does not need to write code to map an object model's data representation to a relational data model and its corresponding database schema
+	
+Hibernate architecture
+	Configuration Object
+		The Configuration object is the first Hibernate object you create in any Hibernate application and usually created only once during application initialization.
+		The Configuration object reads and establishes the properties Hibernate uses to get connected to a database and configure itself for work.
+		new Configuration()
+	SessionFactory
+		The SessionFactory can also provide caching of persistent objects.
+		As its name implies it is a factory for Session objects.
+		The SessionFactory is created from a Configuration object,
+		One SessionFactory object is created per database.It is a thread safe object.
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+	Session object
+		 Main interface to accomplish work with the database.Does the work of getting a physical connection to the database
+		 Persistent objects are saved and retrieved through a Session object.
+		 A Session object is lightweight and inexpensive to create.
+		 Session objects are not thread safe.So,session objects should not be kept open for a long time.
+		 Session session = factory.openSession();
+	Transaction Object (Optional)
+		When modifications are made to the database, Session objects are used to create a Transaction object.
+		A Transaction represents a unit of work with the database
+		The Hibernate Transaction object abstracts the developer from having to deal with the underlying transaction manager/transaction.
+		session.beginTransaction();
+	Query Object
+		Query objects use SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects.
+		A Query instance is used to bind query parameters, limit the number of results returned by the query, and finally to execute the query.
+	Criteria Object
+		Criteria object are used to create and execute object oriented criteria queries to retrieve objects.
+		
+Data modelling
+
+Hibernate Configuration

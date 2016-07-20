@@ -1,0 +1,1 @@
+Persist :  State of (some of) our objects to live beyond the scope of the JVM so that the same state is available later.

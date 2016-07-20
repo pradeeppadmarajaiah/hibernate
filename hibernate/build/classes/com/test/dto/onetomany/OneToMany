@@ -1,0 +1,23 @@
+Both DTO should be entity
+
+y relationship in Java is where the source object has an attribute that stores a collection of target objects and 
+if those target objects had the inverse relationship back to the source object it would be a ManyToOne relationship.
+
+
+Hibernate: insert into USER_ONE_TO_MANY (USER_ID, USER_NAME) values (default, ?)
+Hibernate: insert into VEHICLE_ONE_TO_MANY (VEHICLE_ID, VEHICLE_NAME) values (default, ?)
+Hibernate: insert into VEHICLE_ONE_TO_MANY (VEHICLE_ID, VEHICLE_NAME) values (default, ?)
+Hibernate: insert into USER_ONE_TO_MANY_VEHICLE_ONE_TO_MANY (USER_ONE_TO_MANY_USER_ID, vehicle_VEHICLE_ID) values (?, ?)
+Hibernate: insert into USER_ONE_TO_MANY_VEHICLE_ONE_TO_MANY (USER_ONE_TO_MANY_USER_ID, vehicle_VEHICLE_ID) values (?, ?)
+
+New table is generated USER_ONE_TO_MANY_VEHICLE_ONE_TO_MANY with having USER_ONE_TO_MANY_USER_ID,vehicle_VEHICLE_ID  as the column id.
+To change the table and column name generated @JoinTable(joinColumns = @JoinColumn(name = "USER_ID") , inverseJoinColumns = @JoinColumn(name = "VEHICLE_ID") )
+
+Hibernate: insert into USER_ONE_TO_MANY (USER_ID, USER_NAME) values (default, ?)
+Hibernate: insert into VEHICLE_ONE_TO_MANY (VEHICLE_ID, VEHICLE_NAME) values (default, ?)
+Hibernate: insert into VEHICLE_ONE_TO_MANY (VEHICLE_ID, VEHICLE_NAME) values (default, ?)
+Hibernate: insert into USER_VEHICLE (USER_ID, VEHICLE_ID) values (?, ?)
+Hibernate: insert into USER_VEHICLE (USER_ID, VEHICLE_ID) values (?, ?)
+
+
+Using "mappedBy" attribute in @OneToMany annotations

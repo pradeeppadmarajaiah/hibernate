@@ -1,0 +1,75 @@
+Create a data model class.	
+	Annotate with @Entity
+	Mapping needs to added to cfg.xml to identify this as the entity class
+
+To save 
+	Create a session factory from config.xml. This will be created once.
+	SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+	
+	Open a session
+	Session session = factory.openSession();
+	
+	Begin the Transaction
+		session.beginTransaction();
+	
+	Save the session
+		session.save(details);
+	
+	Commit and close the transaction
+		session.getTransaction().commit();
+	
+	
+	
+@Entity annotation 
+	indicates that the JavaBean is a persistent entity. 
+	Each entity has an associated table in relational database. 
+	Each instance of the entity represents a row of the table.
+	Entity class is an annotated POJO (Plain Old java Object). Here are some points to be noted during writing entity class:
+		 Class must have constructor
+		 Create getter setter for each field
+		 Don't define any field static or final.
+		 
+@Basic annotation
+
+@Transient : Ignore that field not to be inserted .
+
+@Temporal : Used for Date filtering
+			(TemporalType.DATE) : inserts only date
+			TemporalType.TIME : inserts only time
+			
+@Lob : Large object
+	if its annotated on String : it will take clob
+	if its annotated on String : it will take blob
+	
+Two types of objects in Hibernate 
+	1. Value Object 
+	2. Entities
+
+	Value Objects are the objects which can not stand alone for example Address if you say address people will ask whose address is this. so it can not stand alone  (@Embedded & @Embeddable)
+ 
+	Entity Objects are those who can stand alone like College and Student. (Entity (@Entity))
+	
+To answer why we are creating two different classes, its a OOPs concept that you should have loose coupling and high cohesion among classes, that means you should create classes for specialized purpose only for example your Student class should be all the info related to Student only.
+
+
+	In an application object model some objects are considered independent, and others are considered dependent parts of other objects. 
+	In UML a relationship to a dependent object is considered an aggregate or composite association.
+	In a relational database this kind of relationship could be modeled in two ways, the dependent object could have its own table, or its data could be embedded in the independent objects table.
+	In JPA a relationship where the target object's data is embedded in the source object's table is considered an embedded relationship, and the target object is considered an Embeddable object. 
+	Embeddable objects have different requirements and restrictions than Entity objects and are defined by the @Embeddable annotation or <embeddable> element.
+
+	
+@AttributeOverrides annotation is used in hibernate/JPA to rename the column(s) name of the embeddedable class while it is being embedded in other class.
+
+@EmbeddeId
+
+@ElementCollection 
+		can be used to define a one-to-many relationship to an Embeddable object, or a Basic value (such as a collection of Strings).
+		Example: Single User having list of address	
+		The ElementCollection values are always stored in a separate table
+		https://en.wikibooks.org/wiki/Java_Persistence/ElementCollection
+		
+Proxy object & Lazy initialization of Hibernate
+
+In Hibernate 3, when we fetching the user object from the database actually its retrieved the proxy object of the user class means only first level of the fields are initializing with the associated values from the database. Field listOfAddresses does not have the value. If you want the list address you should call the following method you will get the listOfAddresses.
+                                        user.getOrders(); --->> this return the list of the address associated with that particular user which name is XYZ this is the default behavior of the Hibernate 3. 

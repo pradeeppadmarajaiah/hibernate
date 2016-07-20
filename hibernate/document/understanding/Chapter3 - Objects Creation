@@ -1,0 +1,22 @@
+One to One Mapping : will create a column_id in parent entity
+
+One to Many
+Many to One
+
+Will create a separate table to save the relationships.
+
+Coming (One to Many) & (Many to One) creates a bidirectional relationship.
+
+
+Many to Many
+
+@NotFound
+
+Hibernate Collections
+Bag Semantic
+Bag Semantic with Id
+List Semantic : Can be ordered
+Set Semantic
+Map Semantic
+
+@Cascade	

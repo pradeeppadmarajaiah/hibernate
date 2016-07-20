@@ -1,0 +1,17 @@
+Both DTO should be entity
+
+Create a instance one object in another object of DTO and annotate with @OneToOne . Then Set the values in Main method.
+	Answer : It creates new column vehicleOneToOne_VEHICLE_ID in UserTable
+	
+Hibernate: insert into USER_ONE_TO_ONE (USER_ID, USER_NAME, vehicleOneToOne_VEHICLE_ID) values (default, ?, ?)
+Hibernate: insert into VEHICLE_ONE_TO_ONE (VEHICLE_ID, VEHICLE_NAME) values (default, ?)
+Hibernate: update USER_ONE_TO_ONE set USER_NAME=?, vehicleOneToOne_VEHICLE_ID=? where USER_ID=?
+
+To Change the default generated column Name: use @JoinColumn(name = "VEHICLE_ID")
+
+
+A OneToOne relationship in Java is where the source object has an attribute that references another target object and (if) that target object had the inverse relationship back to the source object it would also be a OneToOne relationship.
+All relationships in Java and JPA are unidirectional
+
+
+
